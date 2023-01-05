@@ -23,6 +23,9 @@ function getRelativeTime(datetime) {
   if (interval > 1) {
     return `${interval} minutes ago`;
   }
+  if (interval === 1) {
+    return `${interval} minute ago`;
+  }
   if (seconds < 5) {
     return "just now";
   }
