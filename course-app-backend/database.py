@@ -52,7 +52,7 @@ def add_post(title, body, created_at):
         cursor = connection.execute(
             "INSERT INTO posts (title, body, date) VALUES(?, ?, ?);", (title, body, created_at)
         )
-        return cursor.lastrowid
+        return {"id": cursor.lastrowid, "title": title, "body": body, "date": created_at}
 
 
 def add_comment(body, created_at, post_id):
