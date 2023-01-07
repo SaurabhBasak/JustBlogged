@@ -11,8 +11,6 @@ const PostDetail = () => {
         `http://127.0.0.1:8000/posts/${params.post_id}`
       );
       post = await response.json();
-      console.log(post);
-      console.log(post.title);
       setPost(post);
     };
 
