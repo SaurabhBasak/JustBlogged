@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import RelativeTime from "./RelativeTime";
+import { Link } from "react-router-dom";
 
 function PostList(props) {
   useEffect(() => {
@@ -17,15 +18,19 @@ function PostList(props) {
       <ul>
         {props.posts.map((post) => (
           <li key={post.id}>
-            <h3>{post.title}</h3>
-            <RelativeTime datetime={post.date} />
-            <p>{post.body}</p>
+            <Link to={`/posts/${post.id}`}>
+              <h1>{post.title}</h1>
+            </Link>
+            <div>
+              <RelativeTime datetime={post.date} />
+              <p>{post.body}</p>
+            </div>
             <hr></hr>
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
 
 export default PostList;

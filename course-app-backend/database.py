@@ -61,7 +61,7 @@ def add_comment(body, created_at, post_id):
             cursor = connection.execute(
                 "INSERT INTO comments (body, date, post_id) VALUES(?, ?, ?);", (body, created_at, post_id)
             )
-            return cursor.lastrowid
+            return {"id": cursor.lastrowid, "body": body, "date": created_at, "post_id": post_id}
         except sqlite3.IntegrityError as exc:
             raise PostDoesNotExist from exc
 
@@ -83,7 +83,7 @@ def get_post(post_id):
         comments_cursor = connection.execute("""
             SELECT id, body, date
             FROM comments
-            WHERE post_id = ?;
+            WHERE post_id = ? ORDER BY date DESC;
         """, (post_id,))
 
         post = post_cursor.fetchone()
