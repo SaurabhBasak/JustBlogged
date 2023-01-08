@@ -14,6 +14,7 @@ function PostForm(props) {
 
     setTitle("");
     setBody("");
+    props.onCancel();
   };
 
   return (
