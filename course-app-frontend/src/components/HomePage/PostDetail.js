@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CommentsList from "./CommentsList";
 import CommentForm from "./CommentForm";
 
@@ -23,7 +23,6 @@ const PostDetail = () => {
   }, []);
 
   const addCommentToList = (commentBody) => {
-    console.log(commentBody)
     setCommentsList((prevCommentList) => {
       const updatedList = [...prevCommentList];
       updatedList.unshift(commentBody);
@@ -32,7 +31,6 @@ const PostDetail = () => {
   };
 
   const createCommentHandler = async (commentBody) => {
-    console.log(commentBody);
     const response = await fetch(
       `http://127.0.0.1:8000/posts/${params.post_id}`,
       {
@@ -57,6 +55,7 @@ const PostDetail = () => {
 
   return (
     <section>
+      <Link to="/posts">Home</Link>
       <h2>{post.title}</h2>
       <p>{post.body}</p>
       {!isCommenting && (

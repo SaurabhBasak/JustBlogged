@@ -18,11 +18,7 @@ function PostList(props) {
       <ul>
         {props.posts.map((post) => (
           <li key={post.id}>
-            <Link
-              to={`/posts/${post.id}`}
-              postTitle={post.title}
-              postBody={post.body}
-            >
+            <Link to={`/posts/${post.id}`}>
               <h1>{post.title}</h1>
             </Link>
             <div>
@@ -35,6 +31,6 @@ function PostList(props) {
       </ul>
     </div>
   );
-};
+}
 
 export default PostList;
