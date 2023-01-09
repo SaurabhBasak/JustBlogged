@@ -1,7 +1,7 @@
 import "./App.css";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Homepage from "./components/HomePage/Homepage";
-import PostDetail from "./components/HomePage/PostDetail";
+import PostDetail from "./components/Posts/PostDetail";
 
 function App() {
   return (
