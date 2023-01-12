@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import PostForm from "./PostForm";
-import PostList from "./PostList";
+import PostForm from "../Posts/PostForm";
+import PostList from "../Posts/PostList";
 
 function Homepage() {
   const [isPosting, setIsPosting] = useState(false);
@@ -36,8 +36,13 @@ function Homepage() {
 
   return (
     <div>
-      {!isPosting && <button  onClick={startPostingHandler}>Create</button>}
-      {isPosting && <PostForm createPost={createPostHandler} onCancel={stopPostingHandler} />}
+      {!isPosting && <button onClick={startPostingHandler}>Create</button>}
+      {isPosting && (
+        <PostForm
+          createPost={createPostHandler}
+          onCancel={stopPostingHandler}
+        />
+      )}
       <PostList setList={setPostList} posts={postList} />
     </div>
   );
