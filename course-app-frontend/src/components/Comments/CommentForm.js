@@ -17,6 +17,7 @@ const CommentForm = (props) => {
         <label>Comment</label>
         <input
           type="text"
+          placeholder="Comment"
           required
           onChange={(event) => {
             setComment(event.target.value);

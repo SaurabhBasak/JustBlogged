@@ -24,6 +24,7 @@ function PostForm(props) {
           <label>Title</label>
           <input
             type="text"
+            placeholder="Title"
             value={title}
             required
             onChange={(event) => {
@@ -35,6 +36,7 @@ function PostForm(props) {
           <label>Subject</label>
           <input
             type="text"
+            placeholder="Subject"
             value={body}
             required
             onChange={(event) => {
