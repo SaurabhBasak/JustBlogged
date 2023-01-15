@@ -36,7 +36,7 @@ function RelativeTime({ datetime }) {
   const timestamp = new Date(datetime).getTime();
   const relativeTime = getRelativeTime(timestamp);
 
-  return <span>{relativeTime}</span>;
+  return <span className="mb-0 pb-0">{relativeTime}</span>;
 }
 
 export default RelativeTime;

@@ -54,8 +54,15 @@ const PostDetail = () => {
   };
 
   return (
-    <section>
-      <Link to="/posts">Home</Link>
+    <section className="m-8">
+      <div className="flex justify-center">
+        <Link
+          className="px-3 py-2 bg-cyan-600 text-white font-semibold font-mono rounded-full"
+          to="/posts"
+        >
+          Home
+        </Link>
+      </div>
       <h2>{post.title}</h2>
       <p>{post.body}</p>
       {!isCommenting && (

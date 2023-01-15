@@ -35,8 +35,17 @@ function Homepage() {
   };
 
   return (
-    <div>
-      {!isPosting && <button onClick={startPostingHandler}>Create</button>}
+    <div className="m-8">
+      {!isPosting && (
+        <div className="flex justify-center">
+          <button
+            className="px-3 py-2 bg-cyan-600 text-white font-semibold font-mono rounded-full"
+            onClick={startPostingHandler}
+          >
+            Create
+          </button>
+        </div>
+      )}
       {isPosting && (
         <PostForm
           createPost={createPostHandler}

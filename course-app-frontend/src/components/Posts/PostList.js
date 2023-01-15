@@ -15,18 +15,22 @@ function PostList(props) {
 
   return (
     <div>
-      <ul>
+      <ul className="grid grid-cols-2 mr-14 ml-14">
         {props.posts.map((post) => (
-          <li key={post.id}>
-            <Link to={`/posts/${post.id}`}>
-              <h1>{post.title}</h1>
-            </Link>
-            <div>
-              <RelativeTime datetime={post.date} />
-              <p>{post.body}</p>
-            </div>
+          <div className="mr-24 ml-24">
+            <li key={post.id} className="py-8 antialiased">
+              <div className="inline-flex pb-2">
+                <Link to={`/posts/${post.id}`}>
+                  <h1 className="pr-4 text-xl font-medium hover:underline">
+                    {post.title}
+                  </h1>
+                </Link>
+                <RelativeTime datetime={post.date} />
+              </div>
+              <p className="text-ellipsis overflow-hidden ...">{post.body}</p>
+            </li>
             <hr></hr>
-          </li>
+          </div>
         ))}
       </ul>
     </div>
