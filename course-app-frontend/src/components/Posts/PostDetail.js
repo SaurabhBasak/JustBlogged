@@ -57,7 +57,7 @@ const PostDetail = () => {
     <section className="m-8">
       <div className="flex justify-center">
         <Link
-          className="px-3 py-2 bg-cyan-600 text-white font-semibold font-mono rounded-full"
+          className="rounded-full bg-cyan-600 px-3 py-2 font-mono font-semibold text-white"
           to="/posts"
         >
           Home

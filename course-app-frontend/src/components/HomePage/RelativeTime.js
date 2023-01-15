@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 function getRelativeTime(datetime) {
   const seconds = Math.floor((new Date().getTime() - datetime) / 1000);
@@ -37,6 +38,10 @@ function RelativeTime({ datetime }) {
   const relativeTime = getRelativeTime(timestamp);
 
   return <span className="mb-0 pb-0">{relativeTime}</span>;
+}
+
+RelativeTime.propTypes = {
+  datetime: PropTypes.instanceOf(Date),
 }
 
 export default RelativeTime;

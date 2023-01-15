@@ -39,7 +39,7 @@ function Homepage() {
       {!isPosting && (
         <div className="flex justify-center">
           <button
-            className="px-3 py-2 bg-cyan-600 text-white font-semibold font-mono rounded-full"
+            className="rounded-full bg-cyan-600 px-3 py-2 font-mono font-semibold text-white"
             onClick={startPostingHandler}
           >
             Create

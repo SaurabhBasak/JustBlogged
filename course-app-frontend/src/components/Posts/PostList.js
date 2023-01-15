@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import RelativeTime from "../HomePage/RelativeTime";
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 function PostList(props) {
   useEffect(() => {
@@ -15,10 +16,10 @@ function PostList(props) {
 
   return (
     <div>
-      <ul className="grid grid-cols-2 mr-14 ml-14">
+      <ul className="mx-14 grid grid-cols-2">
         {props.posts.map((post) => (
-          <div className="mr-24 ml-24">
-            <li key={post.id} className="py-8 antialiased">
+          <div key={post.id} className="mx-24">
+            <li className="py-8 antialiased">
               <div className="inline-flex pb-2">
                 <Link to={`/posts/${post.id}`}>
                   <h1 className="pr-4 text-xl font-medium hover:underline">
@@ -27,7 +28,7 @@ function PostList(props) {
                 </Link>
                 <RelativeTime datetime={post.date} />
               </div>
-              <p className="text-ellipsis overflow-hidden ...">{post.body}</p>
+              <p className="overflow-hidden text-ellipsis">{post.body}</p>
             </li>
             <hr></hr>
           </div>
@@ -35,6 +36,11 @@ function PostList(props) {
       </ul>
     </div>
   );
+}
+
+PostList.propTypes = {
+  setList: PropTypes.func,
+  posts: PropTypes.array,
 }
 
 export default PostList;

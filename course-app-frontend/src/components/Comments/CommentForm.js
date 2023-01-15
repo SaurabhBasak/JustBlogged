@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
 const CommentForm = (props) => {
   const [comment, setComment] = useState("");
@@ -33,5 +34,11 @@ const CommentForm = (props) => {
     </form>
   );
 };
+
+CommentForm.propTypes = {
+  createComment: PropTypes.func,
+  onCancel: PropTypes.func,
+  post_id: PropTypes.number,
+}
 
 export default CommentForm;

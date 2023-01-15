@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
 function PostForm(props) {
   const [title, setTitle] = useState("");
@@ -55,6 +56,11 @@ function PostForm(props) {
       </form>
     </div>
   );
+}
+
+PostForm.propTypes = {
+  createPost: PropTypes.func,
+  onCancel: PropTypes.func,
 }
 
 export default PostForm;
