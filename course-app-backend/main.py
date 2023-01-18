@@ -21,9 +21,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# database.enable_foreign_key()
 database.create_posts_table()
 database.create_comments_table()
-database.enable_foreign_key()
+
 
 class Comment(BaseModel):
     comment: str
