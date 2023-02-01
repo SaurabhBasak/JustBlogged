@@ -22,7 +22,7 @@ def create_posts_table():
         with connection.cursor() as cursor:
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS posts (
-                    id SERIAL PRIMARY KEY, 
+                    id INTEGER, 
                     title VARCHAR(50), 
                     body VARCHAR(255), 
                     date VARCHAR
@@ -35,12 +35,17 @@ def create_comments_table():
         with connection.cursor() as cursor:
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS comments (
-                    id SERIAL PRIMARY KEY, 
+                    id INTEGER, 
                     body VARCHAR(255), 
                     date VARCHAR, 
                     post_id INTEGER REFERENCES posts(id)
                 );
             """)
+
+def create_sequence():
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute("ALTER SEQUENCE serial RESTART 1;")
 
 
 # def enable_foreign_key():
@@ -56,10 +61,12 @@ def create_comments_table():
 def add_post(title, body, created_at):
     with connection:
         with connection.cursor() as cursor:
+            cursor.execute("SELECT NEXTVAL('serial')")
+            id = cursor.fetchone()[0]
             cursor.execute(
-                "INSERT INTO posts (title, body, date) VALUES(%s, %s, %s);", (title, body, created_at)
+                "INSERT INTO posts VALUES(%s, %s, %s, %s);", (id, title, body, created_at)
             )
-            return {"id": cursor.lastrowid, "title": title, "body": body, "date": created_at}
+            return {"id": id, "title": title, "body": body, "date": created_at}
 
 
 def add_comment(body, created_at, post_id):

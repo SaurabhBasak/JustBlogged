@@ -24,6 +24,7 @@ app.add_middleware(
 # database.enable_foreign_key()
 database.create_posts_table()
 database.create_comments_table()
+database.create_sequence()
 
 
 class Comment(BaseModel):
