@@ -39,12 +39,12 @@ def create_comments_table():
 def create_posts_sequence():
     with connection:
         with connection.cursor() as cursor:
-            cursor.execute("ALTER SEQUENCE post_serial RESTART 1;")
+            cursor.execute("CREATE SEQUENCE IF NOT EXISTS post_serial START 1;")
 
 def create_comments_sequence():
     with connection:
         with connection.cursor() as cursor:
-            cursor.execute("ALTER SEQUENCE comment_serial RESTART 1;")
+            cursor.execute("CREATE SEQUENCE IF NOT EXISTS comment_serial START 1;")
 
 
 # def enable_foreign_key():
