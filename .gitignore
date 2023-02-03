@@ -1,1 +1,4 @@
 course-app-backend/.env
+course-app-backend/__pycache__
+course-app-backend/.vscode
+.vscode
