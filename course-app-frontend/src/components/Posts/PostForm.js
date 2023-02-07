@@ -19,11 +19,11 @@ function PostForm(props) {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="m-auto mb-8 flex max-w-sm justify-center rounded-xl bg-purple-500/40 py-6">
       <form onSubmit={submitHandler}>
-        <div>
-          <div>
-            <label>Title</label>
+        <div className="items-center">
+          <div className="flex flex-col">
+            <label className="font-semibold">Title</label>
             <input
               type="text"
               placeholder="Title"
@@ -34,8 +34,8 @@ function PostForm(props) {
               }}
             ></input>
           </div>
-          <div>
-            <label>Subject</label>
+          <div className="flex flex-col">
+            <label className="font-semibold">Subject</label>
             <input
               type="text"
               placeholder="Subject"
@@ -46,11 +46,11 @@ function PostForm(props) {
               }}
             ></input>
           </div>
-          <div>
-            <button type="button" onClick={props.onCancel}>
+          <div className="grid grid-cols-2">
+            <button className="rounded-full bg-purple-600 px-3 py-2 font-mono font-semibold text-white" type="button" onClick={props.onCancel}>
               Cancel
             </button>
-            <button type="submit">Create</button>
+            <button className="rounded-full bg-purple-600 px-3 py-2 font-mono font-semibold text-white" type="submit">Create</button>
           </div>
         </div>
       </form>
