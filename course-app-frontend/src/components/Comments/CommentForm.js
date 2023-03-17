@@ -17,6 +17,7 @@ const CommentForm = (props) => {
       <div>
         <label>Comment</label>
         <input
+          className="text-black"
           type="text"
           placeholder="Comment"
           required

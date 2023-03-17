@@ -11,14 +11,14 @@ function PostList(props) {
       props.setList(posts);
     };
 
-    getPosts();
+    getPosts();   
   }, []);
 
   return (
     <div>
-      <ul className="m-auto grid max-w-7xl grid-cols-3 gap-x-24 gap-y-12">
+      <ul className="m-auto grid max-w-7xl gap-x-24 gap-y-12 sm:max-w-xl sm:grid-cols-1 md:max-w-2xl md:grid-cols-2 lg:max-w-6xl lg:grid-cols-3 lg:gap-x-28">
         {props.posts.map((post) => (
-          <div key={post.id} className="rounded-xl bg-purple-500/40">
+          <div key={post.id} className="rounded-xl bg-purple-500/40">  
             <li className="p-8 antialiased">
               <div className="inline-flex pb-2">
                 <Link to={`/posts/${post.id}`}>

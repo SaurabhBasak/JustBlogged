@@ -19,12 +19,13 @@ function PostForm(props) {
   };
 
   return (
-    <div className="m-auto mb-8 flex max-w-sm justify-center rounded-xl bg-purple-500/40 py-6">
+    <div className="m-auto mb-8 flex max-w-sm justify-center rounded-xl bg-purple-500/50 py-6">
       <form onSubmit={submitHandler}>
         <div className="items-center">
-          <div className="flex flex-col">
-            <label className="font-semibold">Title</label>
+          <div className="flex flex-col pb-4 text-white">
+            <label className="pb-1 font-semibold">Title</label>
             <input
+              className="rounded-md pl-1 text-black"
               type="text"
               placeholder="Title"
               value={title}
@@ -34,11 +35,12 @@ function PostForm(props) {
               }}
             ></input>
           </div>
-          <div className="flex flex-col">
-            <label className="font-semibold">Subject</label>
+          <div className="flex flex-col pb-4 text-white">
+            <label className="pb-1 font-semibold">Subject</label>
             <input
+              className="rounded-md pl-1 text-black"
               type="text"
-              placeholder="Subject"
+              placeholder="Subject..."
               value={body}
               required
               onChange={(event) => {
@@ -46,11 +48,11 @@ function PostForm(props) {
               }}
             ></input>
           </div>
-          <div className="grid grid-cols-2">
-            <button className="rounded-full bg-purple-600 px-3 py-2 font-mono font-semibold text-white" type="button" onClick={props.onCancel}>
+          <div className="grid grid-cols-2 gap-2">
+            <button className="rounded-full bg-purple-900 px-2 py-1 font-mono text-base font-semibold text-white" type="button" onClick={props.onCancel}>
               Cancel
             </button>
-            <button className="rounded-full bg-purple-600 px-3 py-2 font-mono font-semibold text-white" type="submit">Create</button>
+            <button className="rounded-full bg-purple-900 px-2 py-1 font-mono text-base font-semibold text-white" type="submit">Create</button>
           </div>
         </div>
       </form>
