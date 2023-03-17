@@ -11,26 +11,25 @@ function PostList(props) {
       props.setList(posts);
     };
 
-    getPosts();
+    getPosts();   
   }, []);
 
   return (
     <div>
-      <ul className="mx-14 grid grid-cols-2">
+      <ul className="m-auto grid max-w-7xl gap-x-24 gap-y-12 sm:max-w-xl sm:grid-cols-1 md:max-w-2xl md:grid-cols-2 lg:max-w-6xl lg:grid-cols-3 lg:gap-x-28">
         {props.posts.map((post) => (
-          <div key={post.id} className="mx-24">
-            <li className="py-8 antialiased">
+          <div key={post.id} className="rounded-xl bg-purple-500/40">  
+            <li className="p-8 antialiased">
               <div className="inline-flex pb-2">
                 <Link to={`/posts/${post.id}`}>
-                  <h1 className="pr-4 text-xl font-medium hover:underline">
+                  <h1 className="pr-4 text-xl font-medium text-white hover:underline">
                     {post.title}
                   </h1>
                 </Link>
                 <RelativeTime datetime={post.date} />
               </div>
-              <p className="overflow-hidden text-ellipsis">{post.body}</p>
+              <p className="truncate text-white">{post.body}</p>
             </li>
-            <hr></hr>
           </div>
         ))}
       </ul>
