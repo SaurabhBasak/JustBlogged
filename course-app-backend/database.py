@@ -11,6 +11,10 @@ class PostDoesNotExist(Exception):
     pass
 
 
+class UserDoesNotExist(Exception):
+    pass
+
+
 def create_posts_table():
     with connection:
         with connection.cursor() as cursor:
@@ -36,15 +40,35 @@ def create_comments_table():
                 );
             """)
 
+
+def create_users_table():
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS users (
+                    id SERIAL PRIMARY KEY,
+                    username VARCHAR(50) NOT NULL,
+                    hashed_password VARCHAR(100) NOT NULL,
+                    disabled BOOLEAN NOT NULL DEFAULT false,
+                    date VARCHAR
+                )
+            """)
+
+
 def create_posts_sequence():
     with connection:
         with connection.cursor() as cursor:
-            cursor.execute("CREATE SEQUENCE IF NOT EXISTS post_serial START 1;")
+            cursor.execute("CREATE SEQUENCE IF NOT EXISTS post_serial RESTART 1;")
 
 def create_comments_sequence():
     with connection:
         with connection.cursor() as cursor:
-            cursor.execute("CREATE SEQUENCE IF NOT EXISTS comment_serial START 1;")
+            cursor.execute("CREATE SEQUENCE IF NOT EXISTS comment_serial RESTART 1;")
+
+def create_users_sequence():
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute("CREATE SEQUENCE IF NOT EXISTS user_serial RESTART 1;")
 
 
 # def enable_foreign_key():
@@ -82,6 +106,17 @@ def add_comment(body, created_at, post_id):
                 raise PostDoesNotExist from exc
 
 
+def register_user(username, hashed_password, disabled, created_at):
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT NEXTVAL('user_serial')")
+            id = cursor.fetchone()[0]
+            cursor.execute(
+                "INSERT INTO users VALUES(%s, %s, %s, %s, %s);", (id, username, hashed_password, disabled, created_at)
+            )
+            return {"id":id, "username":username, "hashed_password":hashed_password, "disabled":disabled, "date":created_at}
+
+
 def get_posts():
     with connection:
         with connection.cursor(cursor_factory = psycopg2.extras.RealDictCursor) as cursor:
@@ -114,6 +149,51 @@ def get_post(post_id):
             post["comments"] = cursor.fetchall()
 
             return post
+
+
+def get_users():
+    with connection:
+        with connection.cursor(cursor_factory = psycopg2.extras.RealDictCursor) as cursor:
+            cursor.execute(
+                """SELECT id, username, hashed_password, disabled, date
+                   FROM users
+                """
+            )
+
+            users = cursor.fetchall()
+            return users
+
+
+def get_user(username):
+    with connection:
+        with connection.cursor(cursor_factory = psycopg2.extras.RealDictCursor) as cursor:
+            cursor.execute(
+                """SELECT id, username, hashed_password, disabled, date
+                   FROM users
+                   WHERE username = %s;
+                """, (username,)
+            )
+
+            user = cursor.fetchone()
+
+            if user is None:
+                raise UserDoesNotExist
+            
+            return user
+
+
+def user_exists(username):
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """SELECT EXISTS(SELECT 1 
+                   FROM users 
+                   WHERE username = %s)
+                """, (username,)
+            )
+
+            result = cursor.fetchone()[0]
+            return result
 
 
 def update_post(post_id, title, body, created_at):
