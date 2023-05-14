@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import PostForm from "../Posts/PostForm";
 import PostList from "../Posts/PostList";
+// import { Link } from "react-router-dom";
 
 function Homepage() {
   const [isPosting, setIsPosting] = useState(false);
   const [postList, setPostList] = useState([]);
+  // const [loggedIn, setLoggedIn] = useState(false);
 
   const addPostToList = (postInfo) => {
     setPostList((prevPostList) => {
@@ -35,11 +37,11 @@ function Homepage() {
   };
 
   return (
-    <div className="m-8">
+    <div className="m-8 bg-neutral-800">
       {!isPosting && (
-        <div className="flex justify-center">
+        <div className="flex justify-center pb-6">
           <button
-            className="rounded-full bg-cyan-600 px-3 py-2 font-mono font-semibold text-white"
+            className="rounded-full bg-purple-600 px-3 py-2 font-mono font-semibold text-white"
             onClick={startPostingHandler}
           >
             Create

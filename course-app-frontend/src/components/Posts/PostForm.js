@@ -19,12 +19,12 @@ function PostForm(props) {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="m-auto mb-8 flex max-w-sm justify-center rounded-xl bg-purple-500/50 py-6">
       <form onSubmit={submitHandler}>
-        <div>
-          <div>
-            <label>Title</label>
+        <div className="items-center">
+          <div className="flex flex-col pb-4 text-white">
             <input
+              className="rounded-md pl-1 text-black"
               type="text"
               placeholder="Title"
               value={title}
@@ -34,11 +34,11 @@ function PostForm(props) {
               }}
             ></input>
           </div>
-          <div>
-            <label>Subject</label>
+          <div className="flex flex-col pb-4 text-white">
             <input
+              className="rounded-md pl-1 text-black"
               type="text"
-              placeholder="Subject"
+              placeholder="Subject..."
               value={body}
               required
               onChange={(event) => {
@@ -46,11 +46,11 @@ function PostForm(props) {
               }}
             ></input>
           </div>
-          <div>
-            <button type="button" onClick={props.onCancel}>
+          <div className="grid grid-cols-2 gap-2">
+            <button className="rounded-full bg-purple-900 px-2 py-1 font-mono text-base font-semibold text-white" type="button" onClick={props.onCancel}>
               Cancel
             </button>
-            <button type="submit">Create</button>
+            <button className="rounded-full bg-purple-900 px-2 py-1 font-mono text-base font-semibold text-white" type="submit">Create</button>
           </div>
         </div>
       </form>
