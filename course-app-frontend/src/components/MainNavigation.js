@@ -7,7 +7,7 @@ function MainNavigation() {
       <nav>
         <ul className="mt-8 flex justify-center gap-5 px-3 py-2 font-mono font-semibold text-white">
           <li>
-            <NavLink to="/auth" className="rounded-full">
+            <NavLink to="auth" className="rounded-full">
               Signup/Login
             </NavLink>
           </li>

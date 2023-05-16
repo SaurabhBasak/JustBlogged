@@ -32,7 +32,7 @@ app = FastAPI()
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 
 origins = [
@@ -152,13 +152,12 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
 
 
 @app.post("/signup", tags=["User Registration"])
-def register(username: str, password:str):
-    # user email validation pending
-    if database.user_exists(username):
+def register(form_data: OAuth2PasswordRequestForm = Depends()):
+    if database.user_exists(form_data.username):
         return "Username exists"
-    hashed_password = get_password_hash(password)
+    hashed_password = get_password_hash(form_data.password)
     disabled = False
-    return database.register_user(username, hashed_password, disabled, datetime.now(currentTime))
+    return database.register_user(form_data.username, hashed_password, disabled, datetime.now(currentTime))
 
 
 @app.post("/login", response_model=Token)
