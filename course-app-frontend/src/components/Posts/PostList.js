@@ -13,6 +13,7 @@ function PostList(props) {
 
     getPosts();   
   }, []);
+  
 
   return (
     <div>

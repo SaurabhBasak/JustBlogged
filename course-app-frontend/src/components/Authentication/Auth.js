@@ -8,7 +8,7 @@ function Auth() {
 
 export default Auth;
 
-export async function action(request) {
+export async function action({ request }) {
   const searchParams = new URL(request.url).searchParams;
   const mode = searchParams.get("mode") || "login";
 
@@ -17,16 +17,18 @@ export async function action(request) {
   }
 
   const data = await request.formData();
-  const authData = {
-    username: data.get("username"),
-    password: data.get("password"),
-  };
+
+  const formData = new URLSearchParams();
+  formData.append("grant_type", "password");
+  formData.append("username", data.get("username"));
+  formData.append("password", data.get("password"));
+  formData.append("scope", "");
 
   const response = await fetch("http://127.0.0.1:8000/" + mode, {
     method: "POST",
-    body: JSON.stringify(authData),
+    body: formData,
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
   });
 
@@ -38,11 +40,15 @@ export async function action(request) {
     throw json({ message: "Could not authenticate user." }, { status: 500 });
   }
 
-  const resData = await response.json();
   if (mode === "login") {
+    const resData = await response.json();
+    console.log(response);
+    console.log(resData);
     const token = resData.token;
-    console.log(token);
     localStorage.setItem("token", token);
+    const expiration = new Date();
+    expiration.setMinutes(expiration.getMinutes + 30);
+    localStorage.setItem('expiration', expiration.toISOString());
   }
 
   return redirect("/");

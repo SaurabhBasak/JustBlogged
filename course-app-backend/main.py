@@ -7,6 +7,7 @@ import pytz
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
 from passlib.context import CryptContext
+import uvicorn
 
 
 currentTime = pytz.timezone('US/Eastern')
@@ -236,3 +237,7 @@ def updatePost(post_id: int, request: Post):
 @app.delete("/posts/{post_id}", tags=["Delete post"])
 def deletePost(post_id: int):
     return database.delete_post(post_id)
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

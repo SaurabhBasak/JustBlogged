@@ -11,7 +11,9 @@ import {
 import Homepage from "./components/HomePage/Homepage";
 import PostDetail from "./components/Posts/PostDetail";
 import ErrorPage from "./components/HomePage/ErrorPage";
-import Auth from "./components/Authentication/Auth";
+import Auth, {
+    action as authAction
+} from './components/Authentication/Auth';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +24,7 @@ const router = createBrowserRouter([
       { index: true, element: <Navigate to="posts" replace /> },
       { path: "posts", element: <Homepage /> },
       { path: "posts/:post_id", element: <PostDetail /> },
-      { path: "auth", element: <Auth /> },
+      { path: "auth", element: <Auth />, action: authAction },
     ],
   },
 ]);
