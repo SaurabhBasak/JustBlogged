@@ -69,15 +69,30 @@ const PostDetail = () => {
           <p>{post.body}</p>
         </div>
       </div>
-      <h1 className="pb-1 pt-5 text-2xl font-bold">Comments</h1>
+      <h1 className="pt-5 text-2xl font-bold">Comments</h1>
       {!isCommenting && (
         <div>
           {token ? (
-            <button onClick={startCommentingHandler} className="py-2 underline">
-              Comment
-            </button>
+            <>
+              <button
+                onClick={startCommentingHandler}
+                className="py-3 tracking-wide underline decoration-1 underline-offset-4"
+              >
+                Comment...
+              </button>
+              <hr></hr>
+            </>
           ) : (
-            <Link to="/auth?mode=login">Comment</Link>
+            <>
+              <p className="py-3 tracking-wide underline decoration-1 underline-offset-4">
+                <Link
+                  to="/auth?mode=login"
+                >
+                  Comment...
+                </Link>
+              </p>
+              <hr></hr>
+            </>
           )}
         </div>
       )}

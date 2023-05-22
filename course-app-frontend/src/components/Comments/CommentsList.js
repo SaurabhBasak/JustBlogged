@@ -8,8 +8,12 @@ const CommentsList = (props) => {
       <ul>
         {props.comments.map((comment) => (
           <li key={comment.id}>
-            <p>{comment.body}</p>
-            <RelativeTime datetime={comment.date} />
+            <div className="flex gap-3 py-3">
+              <p>{comment.body}</p>
+              <span>|</span>
+              <p className="italic"><RelativeTime datetime={comment.date}/></p>
+            </div>
+            <hr></hr>
           </li>
         ))}
       </ul>
