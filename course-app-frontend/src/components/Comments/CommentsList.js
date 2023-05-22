@@ -1,6 +1,6 @@
 import React from "react";
 import RelativeTime from "../HomePage/RelativeTime";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const CommentsList = (props) => {
   return (
@@ -19,6 +19,6 @@ const CommentsList = (props) => {
 
 CommentsList.propTypes = {
   comments: PropTypes.array,
-}
+};
 
 export default CommentsList;

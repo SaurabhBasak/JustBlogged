@@ -32,8 +32,12 @@ export async function action({ request }) {
     },
   });
 
-  if (response.status === 422 || response.status === 401) {
+  if (response.status === 422) {
     return response;
+  }
+
+  if (response.status === 401) {
+    return redirect('/auth?mode=signup');
   }
 
   if (!response.ok) {
@@ -42,13 +46,8 @@ export async function action({ request }) {
 
   if (mode === "login") {
     const resData = await response.json();
-    console.log(response);
-    console.log(resData);
-    const token = resData.token;
+    const token = resData.access_token;
     localStorage.setItem("token", token);
-    const expiration = new Date();
-    expiration.setMinutes(expiration.getMinutes + 30);
-    localStorage.setItem('expiration', expiration.toISOString());
   }
 
   return redirect("/");

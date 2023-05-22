@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams, useRouteLoaderData } from "react-router-dom";
 import CommentsList from "../Comments/CommentsList";
 import CommentForm from "../Comments/CommentForm";
+import { getAuthToken } from "../Authentication/AuthToken";
 
 const PostDetail = () => {
+  const token = useRouteLoaderData("root");
   const [isCommenting, setIsCommenting] = useState(false);
   const params = useParams();
   let [post, setPost] = useState({});
@@ -31,6 +33,7 @@ const PostDetail = () => {
   };
 
   const createCommentHandler = async (commentBody) => {
+    const token = getAuthToken();
     const response = await fetch(
       `http://127.0.0.1:8000/posts/${params.post_id}`,
       {
@@ -38,6 +41,7 @@ const PostDetail = () => {
         body: JSON.stringify(commentBody),
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
         },
       }
     );
@@ -65,9 +69,19 @@ const PostDetail = () => {
           <p>{post.body}</p>
         </div>
       </div>
+      <h1 className="pb-1 pt-5 text-2xl font-bold">Comments</h1>
       {!isCommenting && (
-        <button onClick={startCommentingHandler}>Comment</button>
+        <div>
+          {token ? (
+            <button onClick={startCommentingHandler} className="py-2 underline">
+              Comment
+            </button>
+          ) : (
+            <Link to="/auth?mode=login">Comment</Link>
+          )}
+        </div>
       )}
+
       {isCommenting && (
         <CommentForm
           post_id={params.post_id}

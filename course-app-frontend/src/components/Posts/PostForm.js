@@ -24,7 +24,7 @@ function PostForm(props) {
         <div className="items-center">
           <div className="flex flex-col pb-4 text-white">
             <input
-              className="rounded-md pl-1 text-black"
+              className="rounded-md px-2 py-1 text-black"
               type="text"
               placeholder="Title"
               value={title}
@@ -36,7 +36,7 @@ function PostForm(props) {
           </div>
           <div className="flex flex-col pb-4 text-white">
             <input
-              className="rounded-md pl-1 text-black"
+              className="rounded-md px-2 py-1 text-black"
               type="text"
               placeholder="Subject..."
               value={body}
