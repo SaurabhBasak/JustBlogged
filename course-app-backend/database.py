@@ -118,15 +118,13 @@ def register_user(username, hashed_password, disabled, created_at):
 
 
 def get_posts():
-    with connection:
-        with connection.cursor(cursor_factory = psycopg2.extras.RealDictCursor) as cursor:
+    with connection.cursor(cursor_factory = psycopg2.extras.RealDictCursor) as cursor:
             cursor.execute("SELECT * FROM posts ORDER BY date DESC;")
             return cursor.fetchall()
 
 
 def get_post(post_id):
-    with connection:
-        with connection.cursor(cursor_factory = psycopg2.extras.RealDictCursor) as cursor:
+    with connection.cursor(cursor_factory = psycopg2.extras.RealDictCursor) as cursor:
             cursor.execute(
                 """SELECT title, body, date 
                    FROM posts
