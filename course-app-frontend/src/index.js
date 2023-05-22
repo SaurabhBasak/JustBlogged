@@ -11,20 +11,23 @@ import {
 import Homepage from "./components/HomePage/Homepage";
 import PostDetail from "./components/Posts/PostDetail";
 import ErrorPage from "./components/HomePage/ErrorPage";
-import Auth, {
-    action as authAction
-} from './components/Authentication/Auth';
+import Auth, { action as authAction } from "./components/Authentication/Auth";
+import { action as logoutAction } from "./components/Authentication/Logout";
+import { tokenLoader } from "./components/Authentication/AuthToken";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
+    id: "root",
+    loader: tokenLoader,
     children: [
       { index: true, element: <Navigate to="posts" replace /> },
       { path: "posts", element: <Homepage /> },
       { path: "posts/:post_id", element: <PostDetail /> },
       { path: "auth", element: <Auth />, action: authAction },
+      { path: "logout", action: logoutAction },
     ],
   },
 ]);
@@ -32,7 +35,7 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
