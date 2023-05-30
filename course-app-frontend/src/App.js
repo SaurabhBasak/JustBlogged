@@ -1,4 +1,3 @@
-import "./App.css";
 import React, { useEffect } from "react";
 import { Outlet, useLoaderData, useSubmit } from "react-router-dom";
 import MainNavigation from "./components/MainNavigation";
