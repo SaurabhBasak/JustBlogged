@@ -13,11 +13,10 @@ const CommentForm = (props) => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <div>
-        <label>Comment</label>
+    <form onSubmit={submitHandler} className="py-3">
+      <div className="pb-2">
         <input
-          className="text-black"
+          className="rounded-md pl-1 text-black"
           type="text"
           placeholder="Comment"
           required
@@ -26,7 +25,7 @@ const CommentForm = (props) => {
           }}
         ></input>
       </div>
-      <div>
+      <div className="flex gap-4">
         <button type="button" onClick={props.onCancel}>
           Cancel
         </button>

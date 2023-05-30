@@ -1,23 +1,34 @@
-import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
-import Homepage from "./components/HomePage/Homepage";
-import PostDetail from "./components/Posts/PostDetail";
+import React, { useEffect } from "react";
+import { Outlet, useLoaderData, useSubmit } from "react-router-dom";
+import MainNavigation from "./components/MainNavigation";
+import { getTokenDuration } from "./components/Authentication/AuthToken";
 
 function App() {
+  const token = useLoaderData();
+  const submit = useSubmit();
+
+  useEffect(() => {
+    if (!token) {
+      return;
+    }
+
+    if (token === "EXPIRED") {
+        submit(null, { action: "/logout", method: "post" });
+        return;
+    }
+
+    const tokenDuration = getTokenDuration();
+
+    setTimeout(() => {
+      submit(null, { action: "/logout", method: "post" });
+    }, tokenDuration);
+  }, [token, submit]);
+
   return (
-    <div>
-      <Switch>
-        <Route path="/" exact>
-          <Redirect to="/posts" />
-        </Route>
-        <Route path="/posts" exact>
-          <Homepage />
-        </Route>
-        <Route path="/posts/:post_id">
-          <PostDetail />
-        </Route>
-      </Switch>
-    </div>
+    <>
+      <MainNavigation />
+      <Outlet />
+    </>
   );
 }
 

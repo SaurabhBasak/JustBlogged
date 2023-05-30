@@ -8,17 +8,29 @@ function getRelativeTime(datetime) {
   if (interval > 1) {
     return `${interval} years ago`;
   }
+  if (interval === 1) {
+    return `${interval} year ago`;
+  }
   interval = Math.floor(seconds / 2592000);
   if (interval > 1) {
     return `${interval} months ago`;
+  }
+  if (interval === 1) {
+    return `${interval} month ago`;
   }
   interval = Math.floor(seconds / 86400);
   if (interval > 1) {
     return `${interval} days ago`;
   }
+  if (interval === 1) {
+    return `${interval} day ago`;
+  }
   interval = Math.floor(seconds / 3600);
   if (interval > 1) {
     return `${interval} hours ago`;
+  }
+  if (interval === 1) {
+    return `${interval} hour ago`;
   }
   interval = Math.floor(seconds / 60);
   if (interval > 1) {

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useRouteLoaderData } from "react-router-dom";
 import CommentsList from "../Comments/CommentsList";
 import CommentForm from "../Comments/CommentForm";
+import { getAuthToken } from "../Authentication/AuthToken";
 
 const PostDetail = () => {
+  const token = useRouteLoaderData("root");
   const [isCommenting, setIsCommenting] = useState(false);
   const params = useParams();
   let [post, setPost] = useState({});
@@ -31,6 +33,7 @@ const PostDetail = () => {
   };
 
   const createCommentHandler = async (commentBody) => {
+    const token = getAuthToken();
     const response = await fetch(
       `http://127.0.0.1:8000/posts/${params.post_id}`,
       {
@@ -38,6 +41,7 @@ const PostDetail = () => {
         body: JSON.stringify(commentBody),
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
         },
       }
     );
@@ -55,17 +59,9 @@ const PostDetail = () => {
 
   return (
     <section className="m-8 text-white">
-      <div className="mb-6 flex justify-center">
-        <Link
-          className="rounded-full bg-purple-600 px-3 py-2 font-mono font-semibold text-white"
-          to="/posts"
-        >
-          Home
-        </Link>
-      </div>
       <div className="m-auto min-w-min max-w-xl rounded-xl bg-purple-500/40">
         <div className="flex justify-center pt-8">
-          <h2 className="rounded-xl bg-purple-700/70 py-4 px-20 text-2xl font-bold">
+          <h2 className="rounded-xl bg-purple-700/70 px-20 py-4 text-2xl font-bold">
             {post.title}
           </h2>
         </div>
@@ -73,9 +69,34 @@ const PostDetail = () => {
           <p>{post.body}</p>
         </div>
       </div>
+      <h1 className="pt-5 text-2xl font-bold">Comments</h1>
       {!isCommenting && (
-        <button onClick={startCommentingHandler}>Comment</button>
+        <div>
+          {token ? (
+            <>
+              <button
+                onClick={startCommentingHandler}
+                className="py-3 tracking-wide underline decoration-1 underline-offset-4"
+              >
+                Comment...
+              </button>
+              <hr></hr>
+            </>
+          ) : (
+            <>
+              <p className="py-3 tracking-wide underline decoration-1 underline-offset-4">
+                <Link
+                  to="/auth?mode=login"
+                >
+                  Comment...
+                </Link>
+              </p>
+              <hr></hr>
+            </>
+          )}
+        </div>
       )}
+
       {isCommenting && (
         <CommentForm
           post_id={params.post_id}
