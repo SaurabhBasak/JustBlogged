@@ -1,0 +1,7 @@
+fastapi
+pydantic
+pytz
+jose
+passlib
+uvicorn
+psycopg2

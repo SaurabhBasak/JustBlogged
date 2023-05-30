@@ -1,0 +1,1 @@
+sudo service docker start - https://stackoverflow.com/questions/71815092/docker-cannot-connect-to-the-docker-daemon-at-unix-var-run-docker-sock-is-th

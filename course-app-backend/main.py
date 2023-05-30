@@ -15,7 +15,7 @@ currentTime = pytz.timezone('US/Eastern')
 
 SECRET_KEY = "907c266dfe33cbe7893ad99757be904d400fda46ff266ea2e54881fde049741d"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 
 fake_users_db = {
@@ -155,7 +155,7 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
 @app.post("/signup", tags=["User Registration"])
 def register(form_data: OAuth2PasswordRequestForm = Depends()):
     if database.user_exists(form_data.username):
-        return "Username exists"
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username exists")
     hashed_password = get_password_hash(form_data.password)
     disabled = False
     return database.register_user(form_data.username, hashed_password, disabled, datetime.now(currentTime))
