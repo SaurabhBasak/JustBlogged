@@ -13,7 +13,7 @@ import PostDetail from "./components/Posts/PostDetail";
 import ErrorPage from "./components/HomePage/ErrorPage";
 import Auth, { action as authAction } from "./components/Authentication/Auth";
 import { action as logoutAction } from "./components/Authentication/Logout";
-import { tokenLoader } from "./components/Authentication/AuthToken";
+import { checkAuthLoader, tokenLoader } from "./components/Authentication/AuthToken";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       { index: true, element: <Navigate to="posts" replace /> },
       { path: "posts", element: <Homepage /> },
       { path: "posts/:post_id", element: <PostDetail /> },
-      { path: "auth", element: <Auth />, action: authAction },
+      { path: "auth", element: <Auth />, action: authAction, loader: checkAuthLoader },
       { path: "logout", action: logoutAction },
     ],
   },

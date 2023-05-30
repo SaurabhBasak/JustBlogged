@@ -41,7 +41,7 @@ function AuthForm() {
             {isLogin ? "Sign up" : "Login"}
           </Link>
           <button className="text-white">
-            Save
+            Submit
           </button>
         </div>
       </Form>

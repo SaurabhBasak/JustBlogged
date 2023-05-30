@@ -37,7 +37,11 @@ export async function action({ request }) {
   }
 
   if (response.status === 401) {
-    return redirect('/auth?mode=signup');
+    return redirect("/auth?mode=signup");
+  }
+
+  if (response.status === 400) {
+    return redirect("/auth?mode=login");
   }
 
   if (!response.ok) {
@@ -48,6 +52,9 @@ export async function action({ request }) {
     const resData = await response.json();
     const token = resData.access_token;
     localStorage.setItem("token", token);
+    const expiration = new Date();
+    expiration.setHours(expiration.getHours() + 1);
+    localStorage.setItem("expiration", expiration.toISOString());
   }
 
   return redirect("/");
