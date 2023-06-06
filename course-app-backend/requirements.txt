@@ -1,7 +1,8 @@
 fastapi
 pydantic
 pytz
-jose
+python-jose[cryptography]
+python-multipart
 passlib
 uvicorn
 psycopg2

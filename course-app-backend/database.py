@@ -1,11 +1,25 @@
 import os
 import psycopg2
 import psycopg2.extras
-from dotenv import load_dotenv
 
-load_dotenv()
+'''
+postgres://wtjyubfw:1Gf2Y8YmqW7Z8EWlcHIvf5rl68uDppiH@queenie.db.elephantsql.com/wtjyubfw
 
-connection = psycopg2.connect(os.environ["DATABASE_URL"])
+db-user: wtjyubfw
+db-pwd: 1Gf2Y8YmqW7Z8EWlcHIvf5rl68uDppiH
+db-host: queenie.db.elephantsql.com
+db-name: wtjyubfw
+
+db-user + db-pwd + db-host + db-name
+'''
+
+db_host = os.getenv('POSTGRES_HOST')
+db_port = os.getenv('POSTGRES_PORT')
+db_name = os.getenv('POSTGRES_NAME')
+db_user = os.getenv('POSTGRES_USER')
+db_password = os.getenv('POSTGRES_PASSWORD')
+
+connection = psycopg2.connect(database=db_name, user=db_user, host=db_host, port=db_port, password=db_password)
 
 class PostDoesNotExist(Exception):
     pass

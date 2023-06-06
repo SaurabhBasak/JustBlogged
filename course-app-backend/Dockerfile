@@ -8,4 +8,6 @@ WORKDIR /app-backend
 
 RUN pip install --requirement requirements.txt
 
-CMD [ "uvicorn", "main:app", "--reload" ]
+EXPOSE 8000
+
+CMD [ "python3.10", "-m", "uvicorn", "main:app", "--reload", "--host", "0.0.0.0" ]
