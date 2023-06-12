@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  frontend:
+    build: ./course-app-frontend
+    ports:
+      - 3000:3000
+    networks:
+      - blog-app-network
+  backend:
+    build: ./course-app-backend
+    ports:
+      - 8000:8000
+    environment:
+      - POSTGRES_USER=sbasak
+      - POSTGRES_PASSWORD=Fall@2020
+      # - POSTGRES_NAME=blog-app
+      - POSTGRES_HOST=database
+      - POSTGRES_PORT=5432
+    networks:
+      - blog-app-network
+  database:
+    build: ./course-app-backend/postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=sbasak
+      - POSTGRES_PASSWORD=Fall@2020
+      - POSTGRES_NAME=blog-app
+      # - POSTGRES_HOST=sbasak-blog-app
+      - POSTGRES_PORT=5432
+    networks:
+      - blog-app-network
+
+networks:
+  blog-app-network:
+
+      
