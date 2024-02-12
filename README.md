@@ -1,13 +1,41 @@
-sudo service docker start - https://stackoverflow.com/questions/71815092/docker-cannot-connect-to-the-docker-daemon-at-unix-var-run-docker-sock-is-th
+# Just Blogged
+A simple web app that lets users create an account and post a question, fact, thought or anything to express themselves however they like. The web app is authenticated using JWT tokens and built using technologies such as FastAPI, React, PostgreSQL, and Docker
 
-```
-docker build -t image_name directory
-docker run -d -p port:port --name(container) -e env_var=value --network network_name image_name
-docker ps
-docker container ls -a
-docker container stop cont_name
-docker container rm cont_name
-docker container rm -f cont_name
-docker system prune
-docker run -d  --name app-db-container  --network blog-app-network -e POSTGRES_USER=sbasak -e POSTGRES_HOST=sbasak-blog-app -e POSTGRES_PASSWORD=Fall@2020 -e POSTGRES_NAME=blog-app -e POSTGRES_PORT=5432 -h sbasak-blog-app app-database
-```
+# Features
+* Create an account and login
+* Create a text-based post while logged in only
+* Comment on other posts while logged in only
+* View all the latest user posts on the homepage
+
+# Getting Started
+
+To run the app using Docker, follow these steps:
+1. Clone the repo:
+   
+    ```shell
+    git clone git@github.com:SaurabhBasak/JustBlogged.git
+    cd JustBlogged
+    ```
+2. Build the images:
+
+   ```shell
+   docker compose build
+   ```
+
+3. Create the docker containers:
+
+   ```shell
+   docker conatiner create
+   ```
+
+4. Start the development server:
+
+   ```shell
+   docker compose start
+   ```
+
+### To stop the server:
+
+  ```shell
+  docker compose stop
+  ```
