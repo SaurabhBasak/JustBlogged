@@ -25,7 +25,7 @@ To run the app using Docker, follow these steps:
 3. Create the docker containers:
 
    ```shell
-   docker conatiner create
+   docker container create
    ```
 
 4. Start the development server:
