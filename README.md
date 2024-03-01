@@ -13,7 +13,7 @@ To run the app using Docker, follow these steps:
 1. Clone the repo:
    
     ```shell
-    git clone git@github.com:SaurabhBasak/JustBlogged.git
+    git clone https://github.com/SaurabhBasak/JustBlogged.git
     cd JustBlogged
     ```
 2. Build the images:
